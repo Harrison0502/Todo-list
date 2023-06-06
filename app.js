@@ -7,6 +7,8 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 const app = express()
+
+const Todo = require('./models/todo') // 載入 Todo model
 // 設定連線到 mongoDB
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 
@@ -24,7 +26,10 @@ db.once('open', () => {
 })
 // 設定首頁路由
 app.get('/', (req, res) => {
-  res.render('index')
+  Todo.find()
+    .lean()
+    .then(todos => res.render('index', { todos })) // 將資料傳給 index 樣板
+    .catch(error => console.error(error)) // 錯誤處理
 })
 
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
