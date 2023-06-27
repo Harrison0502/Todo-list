@@ -15,9 +15,10 @@ router.get('/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
+//新增一筆or多筆資料
 router.post('', (req, res) => {
-  const name = req.body.name
-  return Todo.create({ name })     // 存入資料庫
+  const names = String(req.body.name).split(',').map(todo=>({name:todo}))
+  return Todo.insertMany(names)     // 存入資料庫
     .then(() => res.redirect('/')) // 新增完成後導回首頁
     .catch(error => console.log(error))
 })
@@ -31,6 +32,7 @@ router.get('/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
+//修改資料請求
 router.put('/:id', (req, res) => {
   const id = req.params.id
   const { name, isDone } = req.body
@@ -44,6 +46,7 @@ router.put('/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
+//刪除資料
 router.delete('/:id', (req, res) => {
   const id = req.params.id
   return Todo.findById(id)
