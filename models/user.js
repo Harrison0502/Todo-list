@@ -14,8 +14,8 @@ const userSchema = new Schema({
     required: true // 這是個必填欄位
   },
   createdAt: {
-    type: Date, // 資料型別是字串
+    type: Date, 
     default: Date.now
   },
 })
-module.exports = mongoose.model('User', todoSchema)
+module.exports = mongoose.model('User', userSchema)
