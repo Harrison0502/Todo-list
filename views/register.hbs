@@ -20,7 +20,10 @@
           <label for="confirmPassword" class="mb-2">Confirm Password</label>
           <input type="password" id="password" name="confirmPassword" class="form-control" placeholder="Confirm Password" value="{{confirmPassword}}">
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Register</button>
+        <button type="submit" class="btn btn-primary btn-block d-inline-block align-middle">Register</button>
+        {{#if userExists}}<p class="lead ms-2 text-danger d-inline-block" style="color: red; font-weight: bold;">User already exists.</p>
+        {{/if}}
+
       </form>
       <p class="lead mt-4">
         Have An Account? <a href="/users/login">Login</a>
