@@ -2,7 +2,7 @@
   <div class="col-md-6 m-auto">
     <div class="card card-body">
       <h1 class="text-center mt-3">Register</h1>
-
+      {{> message}}
       <form action="/users/register" method="POST">
         <div class="mb-3">
           <label for="name" class="mb-2">Name</label>
@@ -21,9 +21,6 @@
           <input type="password" id="password" name="confirmPassword" class="form-control" placeholder="Confirm Password" value="{{confirmPassword}}">
         </div>
         <button type="submit" class="btn btn-primary btn-block d-inline-block align-middle">Register</button>
-        {{#if userExists}}<p class="lead ms-2 text-danger d-inline-block" style="color: red; font-weight: bold;">User already exists.</p>
-        {{/if}}
-
       </form>
       <p class="lead mt-4">
         Have An Account? <a href="/users/login">Login</a>

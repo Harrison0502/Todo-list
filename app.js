@@ -8,6 +8,7 @@ const bodyParser = require('body-parser')
 const routes = require('./routes')
 require('./config/mongoose')
 const usePassport = require('./config/passport')
+const flash = require('connect-flash')
 // 載入 method-override
 const methodOverride = require('method-override')
 const app = express()
@@ -27,10 +28,12 @@ app.use(session({
 }))
 // 呼叫 Passport 函式並傳入 app
 usePassport(app)
-
+app.use(flash())  
 app.use((req,res,next)=>{
   res.locals.isAuthenticated=req.isAuthenticated
   res.locals.user=req.user
+  res.locals.success_msg = req.flash('success_msg')  
+  res.locals.warning_msg = req.flash('warning_msg')  
   next()
 })
 // 將 request 導入路由器
